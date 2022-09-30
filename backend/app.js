@@ -46,7 +46,7 @@ app.put("/login",(req,res)=>{
     console.log("inside login router")
     console.log("login body",req.body.email)
 try {
-       UserData.findOne({email: req.body.email,password:req.body.password})
+       UserData.findOne({email: req.body.email})
         .then((data) => {
             if (data) {
                 res.status(200);

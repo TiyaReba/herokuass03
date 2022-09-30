@@ -40,19 +40,36 @@ app.post('/api/signup',function(req,res){
 
 // TO LOGIN
 
-app.get("/api/login",(req,res)=>{
+app.put("/login",(req,res)=>{
     res.header("Access-Control-Allow-Origin",'*');
     res.header("Access-Control-Allow-method:GET,POST,PUT,DELETE");
-    UserData.find((err,doc)=>{
-        if(err){
-            console.log("error in data getting",+err);
-        }else{
-            res.send(doc)
-        };
-    });
+    console.log("inside login router")
+    console.log("login body",req.body.email)
+try {
+       UserData.findOne({email: req.body.email,password:req.body.password})
+        .then((data) => {
+            if (data) {
+                res.status(200);
+                res.json(data);
+            } else {
+                res.status(404);
+                res.json({
+                    message: ["student not found"],
+                });
+            }
+        })
+        .catch((err) => {
+            console.log("Error:", err);
+            res.json(err);
+        });
+}
+catch (err)
+{
+    console.log("error", err)
+    res.status(500)
+    res.json(err);
+}
 });
-
-
 
 // post for addbooks
 app.post('/api/addbook',function(req,res){

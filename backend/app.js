@@ -40,7 +40,7 @@ app.post('/api/signup',function(req,res){
 
 // TO LOGIN
 
-app.put("/login",(req,res)=>{
+app.put("/api/login",(req,res)=>{
     res.header("Access-Control-Allow-Origin",'*');
     res.header("Access-Control-Allow-method:GET,POST,PUT,DELETE");
     console.log("inside login router")
